@@ -1,0 +1,32 @@
+{
+    "name": "blocksframework/startup",
+    "description": "A module to enable web/console usage of the Blocks PHP framework",
+    "license": "MIT",
+    "keywords": [
+        "blocks",
+        "PHP framework",
+        "system"
+    ],
+    "require": {
+        "php": ">=8.2",
+        "beberlei/assert": "^3.3",
+        "phpunit/phpunit": "^9.6",
+        "blocksframework/system": "dev-master",
+        "blocksframework/config": "dev-master",
+        "blocksframework/localisation": "dev-master",
+        "blocksframework/network": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Blocks\\Startup\\": "src/class"
+        }
+    },
+    "authors": [
+        {
+            "name": "Stephen Stephenson",
+            "email": "stephenson.inbox@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
