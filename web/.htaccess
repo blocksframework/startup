@@ -1,0 +1,65 @@
+# Disable directory listing
+Options -Indexes +FollowSymLinks
+
+# Default charset
+AddDefaultCharset UTF-8
+
+# PHP settings
+php_flag register_globals off
+
+# Used while creating the site
+SetEnvIfNoCase User-Agent .*W3C_Validator.* validator
+
+# Password protection
+AuthUserFile /var/www/philipp/data/www/jwforum.org/.htpasswd
+AuthType Basic
+AuthName "Restricted Access"
+Require valid-user
+
+#order deny,allow
+#allow from env=validator
+#deny from all
+
+# supress php errors display
+php_flag display_startup_errors off
+php_flag display_errors off
+php_flag html_errors off
+php_value docref_root 0
+php_value docref_ext 0
+
+# Errors handling
+#ErrorDocument 400 /error/400
+#ErrorDocument 401 /error/401
+#ErrorDocument 403 /error/403
+#ErrorDocument 404 /error/404
+#ErrorDocument 405 /error/405
+#ErrorDocument 406 /error/406
+#ErrorDocument 409 /error/409
+#ErrorDocument 413 /error/413
+#ErrorDocument 414 /error/414
+#ErrorDocument 500 /application/view/theme/template/error/server_error.html
+#ErrorDocument 501 /error/501
+
+# URLs handling
+RewriteEngine on
+RewriteBase /
+
+# Subdomains to main domain redirect
+RewriteCond %{HTTP_HOST} ^([^.]+).jwforum.org$ [NC]
+RewriteRule ^(.*)$ http://jwforum.org/$1 [R=301,L]
+
+# Removing the trailing slash
+RewriteRule ^(.*)/$ http://%{HTTP_HOST}/$1 [L,R=301]
+
+# Getting rid of the www-prefix
+RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,NC]
+
+# Some standard redirects
+RewriteRule ^language$ en/language [L,R=301]
+RewriteRule ^admin$ /en/admin [L,R=301]
+
+# Catch-all redirect
+# (to test without nginx)
+RewriteRule ^([^/?]*)/([^?]*) index.php?_lang_=$1&_route_=$2 [L,QSA]
+RewriteRule ^(.*) index.php?_lang_=$1 [L,QSA]
