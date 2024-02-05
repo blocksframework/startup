@@ -11,7 +11,14 @@
         "php": ">=8.2",
         "beberlei/assert": "^3.3",
         "phpunit/phpunit": "^9.6",
-        "blocksframework/system": "dev-master"
+        "blocksframework/system": "dev-master",
+        "blocksframework/config": "dev-master",
+        "blocksframework/localisation": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Blocks\\Startup\\":"src/class"
+        }
     },
     "authors": [
         {
